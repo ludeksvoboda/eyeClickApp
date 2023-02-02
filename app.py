@@ -1,4 +1,7 @@
-import numpy as np
+#reproduce results one more time without changing to handler, the results are the same
+#define image_preprocess function in handler.py to match local preprocessing see what happends
+#if reproduced results are not the same then that sucks and we need to figure out why
+#also images can be sent as bytearrays instead of files, check pytorch-serve vision_handler.py
 from PIL import Image
 import json
 
@@ -38,6 +41,7 @@ def do_stuff():
     a_list = []
     _thread.start_new_thread(input_thread, (a_list,))
     i = 0
+    results = {}
     while True:
         img = pygame.surfarray.array3d(cam.get_image()).swapaxes(0,1)
         image_path = SAVEDIR + "test_"+ str(i) +".png"
@@ -50,13 +54,14 @@ def do_stuff():
             save_dict_to_json(results, "results.json")
             break
 
-i  = 0
-results = {}
-while True:
-    img = pygame.surfarray.array3d(cam.get_image()).swapaxes(0,1)
-    image_path = SAVEDIR + "test_"+ str(i) +".png"
-    save_image(img, image_path)
-    response = requests.put(url, data=open(image_path,'rb').read())
-    results[image_path] = response.text
+do_stuff()
+# i  = 0
+# results = {}
+# while True:
+#     img = pygame.surfarray.array3d(cam.get_image()).swapaxes(0,1)
+#     image_path = SAVEDIR + "test_"+ str(i) +".png"
+#     save_image(img, image_path)
+#     response = requests.put(url, data=open(image_path,'rb').read())
+#     results[image_path] = response.text
 
-    i += 1
+#     i += 1
