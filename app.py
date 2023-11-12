@@ -23,7 +23,7 @@ import cv2
 from pynput.mouse import Controller
 
 SAVEDIR = "/home/lu/MLData/EyeClickApp/tests/"
-url = "http://10.0.0.21:8080/predictions/effnet"
+url = "http://10.0.0.21:8080/predictions/efnv2"
 mouse = Controller()
 pygame.init()
 pygame.camera.init()
